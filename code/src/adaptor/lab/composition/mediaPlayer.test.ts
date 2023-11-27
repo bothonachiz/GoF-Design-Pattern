@@ -1,5 +1,7 @@
 import { MediaPlayer } from './mediaPlayer';
 import { SpotifyAPI } from './spotifyAPI';
+import { Youtube } from './youtubeAPI';
+import { YoutubeAdapter } from './youtubeAdapter';
 
 describe('Media Player', () => {
   it('should get nothing if not specific provider.', () => {
@@ -23,6 +25,18 @@ describe('Media Player', () => {
   });
 
   it('should be able to play musics from Youtube playlist, with Adaptor pattern.', () => {
-    //TODO
+    const mediaPlayer = new MediaPlayer();
+    const youtube = new Youtube();
+    const youtubeAdapter = new YoutubeAdapter(youtube)
+    mediaPlayer.setProvider(youtubeAdapter)
+
+    const playlist = mediaPlayer.getPlaylist();
+    
+    expect(mediaPlayer.connect()).toEqual('Connected to Youtube');
+    expect(playlist).toEqual([
+      'youtube.song1',
+      'youtube.song2',
+      'youtube.song3',
+    ]);
   });
 });

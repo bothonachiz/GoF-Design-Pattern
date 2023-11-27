@@ -1,4 +1,4 @@
-import { MediaProvider, SpotifyAPI } from './spotifyAPI';
+import { MediaProvider } from './spotifyAPI';
 
 export class MediaPlayer {
   private provider?: MediaProvider;
